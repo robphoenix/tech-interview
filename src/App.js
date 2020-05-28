@@ -1,6 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
+import logo from "./logo.svg";
+import "./App.css";
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: "https://api.github.com/graphql",
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
+    },
+  }),
+});
 
 function App() {
   return (
